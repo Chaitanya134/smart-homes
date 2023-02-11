@@ -20,9 +20,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import { Link } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Room1 from './Room1.jsx';
+import Dashboard from './Dashboard';
 
 
 const drawerWidth = 240;
@@ -273,13 +271,7 @@ export default function MiniDrawer({chartPoint}) {
 			<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
 				<DrawerHeader />
 
-				<Router>
-					<div className="App">
-						<Routes>
-							<Route exact path='/room1' element={<Room1 chartPoint={chartPoint} />}></Route>
-						</Routes>
-					</div>
-				</Router>
+				<Dashboard />
 
 			</Box>
 		</Box>
