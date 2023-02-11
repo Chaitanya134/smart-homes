@@ -22,7 +22,7 @@ import { Link } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Chart from './Chart.jsx';
+import Room1 from './Room1.jsx';
 
 
 const drawerWidth = 240;
@@ -92,7 +92,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 	}),
 );
 
-export default function MiniDrawer() {
+export default function MiniDrawer({chartPoint}) {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
@@ -276,7 +276,7 @@ export default function MiniDrawer() {
 				<Router>
 					<div className="App">
 						<Routes>
-							<Route exact path='/room1' element={<Chart />}></Route>
+							<Route exact path='/room1' element={<Room1 chartPoint={chartPoint} />}></Route>
 						</Routes>
 					</div>
 				</Router>

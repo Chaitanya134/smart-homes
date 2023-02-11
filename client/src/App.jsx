@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import './App.css'
 import LoadingScreen from './components/LoadingScreen'
 import io from "socket.io-client"
@@ -10,17 +10,25 @@ socket.on("connect", () => {
 })
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [chartPoint, setChartPoint] = useState(0);
+
   useEffect(() => {
-    console.log("hi");
+    // console.log("hi");
     socket.emit("dashboard");
 
-    socket.on("hello", message => console.log({message}));
+    socket.on("start-loading", () => setIsLoading(true))
+    socket.on("stop-loading", () => setIsLoading(false))
+    socket.on("dashboard-data", (file, point) => {
+      setChartPoint(point)
+    })
+    // socket.on("hello", message => console.log({message}));
   }, [])
 
   return (
     <div className="App">
-      {/* <LoadingScreen /> */}
-      <MiniDrawer />
+      {isLoading && <LoadingScreen />}
+      <MiniDrawer chartPoint={chartPoint} />
     </div>
   )
 }
