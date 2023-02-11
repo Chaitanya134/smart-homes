@@ -18,6 +18,36 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.loading-btn {
+  position: relative;
+  box-shadow: 0 0 1rem #d7d7d7;
+}
+
+@media (prefers-color-scheme: dark) {
+  .loading-btn {
+    box-shadow: 0 0 1rem #3e3e3e;
+  }
+}
+
+.loading-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: ripple 1.5s forwards infinite;
+}
+
+@keyframes ripple {
+  from {
+    box-shadow: 0 0 0 0rem lightskyblue;
+    opacity: 1;
+  }
+  to {
+    box-shadow: 0 0 0 2.5rem lightskyblue;
+    opacity: 0;
+  }
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
