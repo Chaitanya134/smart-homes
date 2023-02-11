@@ -104,8 +104,8 @@ const FaceRecognition = () => {
     }
 
     return (
-        <div>
-            <input id="username" value={username} onChange={handleChange} />
+        <div id="face-recognition">
+            <input id="username" className="outline rounded-sm mr-6" placeholder="" value={username} onChange={handleChange} />
             <button onClick={handleClick}>Sign in</button>
             <div id="video-container" className="relative">
                 <video ref={videoRef} width="720" height="550" muted></video>

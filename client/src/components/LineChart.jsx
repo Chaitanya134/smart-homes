@@ -18,17 +18,16 @@ function Chart({ chartPoint }) {
     <>
       <div className="Bulb" style={{ width: '400px', height: '400px', }}>
         <Line data={{
-          // labels:["12AM","3AM", "6AM", "9AM", "12AM", "3AM", "6PM", "9PM", "12AM"],
-          labels: Array(chartData.length).fill("").map((_, i) => i),
+          labels:["12AM","3AM", "6AM", "9AM", "12AM", "3AM", "6PM", "9PM", "12AM"],
           datasets: [
             {
               label: "BULBS",
               data: chartData,
-              // backgroundColor:'yellow',
-              borderColor: 'green',
+              backgroundColor:'#60a5fa6e',
+              borderColor: '#60A5FA',
               tension: 0.4,
-              // fill:true,
-              pointStyle: 'rect',
+              fill:true,
+              pointStyle: 'circle',
               pointBorderColor: 'blue',
               pointBackgroundColor: '#fff',
               showLine: true

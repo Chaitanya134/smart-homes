@@ -105,7 +105,7 @@ export default function MiniDrawer({chartPoint}) {
 	return (
 		<Box sx={{ display: 'flex' }}>
 			<CssBaseline />
-			<AppBar position="fixed" open={open}>
+			<AppBar position="fixed" open={open} style={{background: "linear-gradient(90deg, #60a5fa, #4ade80)"}}>
 				<Toolbar>
 					<IconButton
 						color="inherit"
