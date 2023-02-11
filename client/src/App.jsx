@@ -3,6 +3,8 @@ import './App.css'
 import LoadingScreen from './components/LoadingScreen'
 import io from "socket.io-client"
 import MiniDrawer from "./components/Drawer";
+import FaceRecognition from "./components/FaceRecognition";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const socket = io(import.meta.env.VITE_API_URL);
 socket.on("connect", () => {
@@ -28,7 +30,12 @@ function App() {
   return (
     <div className="App">
       {isLoading && <LoadingScreen />}
-      <MiniDrawer chartPoint={chartPoint} />
+      <Router>
+        <Routes>
+          <Route path="/signin" element={<FaceRecognition />} />
+          <Route path="/" element={<MiniDrawer chartPoint={chartPoint} />} />
+        </Routes>
+      </Router>
     </div>
   )
 }

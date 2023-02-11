@@ -9,6 +9,7 @@ io.on("connection", socket => {
         const chartData = {};
         socket.emit("start-loading");
         const files = fs.readdirSync("public/data");
+        console.log(files);
         files.forEach(async (file) => {
             const data = await csv({ output: "csv" }).fromFile("public/data/" + file);
             // const data = fs.readFileSync("public/data/" + file);
@@ -19,12 +20,12 @@ io.on("connection", socket => {
         });
         socket.emit("stop-loading");
         index = 0;
-        setInterval(() => {
-            files.forEach(file => {
-                if (index >= chartData[file].length) index = 0;
-                socket.emit("dashboard-data", file, chartData[file][index]);
-                index++;
-            })
-        }, 1000)
+        // setInterval(() => {
+        //     files.forEach(file => {
+        //         if (index >= chartData[file].length) index = 0;
+        //         socket.emit("dashboard-data", file, chartData[file][index]);
+        //         index++;
+        //     })
+        // }, 1000)
     });
 });

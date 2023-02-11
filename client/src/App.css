@@ -23,6 +23,14 @@
   box-shadow: 0 0 1rem #d7d7d7;
 }
 
+canvas{
+  position: absolute;
+  /* inset: 0; */
+  top: 0;
+  left: 0;
+  border: 1px solid red;
+}
+
 @media (prefers-color-scheme: dark) {
   .loading-btn {
     box-shadow: 0 0 1rem #3e3e3e;
