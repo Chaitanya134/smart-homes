@@ -71,15 +71,11 @@ const FaceRecognition = () => {
                     const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
                     drawBox.draw(canvas)
                     if (count === 50) {
-                        // stop navigator webcam
+                    // stop navigator webcam
                         videoRef.current.srcObject.getTracks().forEach(track => track.stop());
 
                         clearInterval(interval);
-                        setIsLoading(true);
-                        setTimeout(() => {
-                            setIsLoading(false);
-                            navigate("/");
-                        }, 5000)
+                        navigate("/");
                     }
                     if (result.label === document.getElementById("username").value && result.distance < 0.4) {
                         count++;
