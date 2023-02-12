@@ -1,6 +1,5 @@
 const fs = require("fs");
 const csv = require('csvtojson');
-const tf = require('@tensorflow/tfjs-node');
 
 const { io } = require("./server");
 io.on("connection", socket => {
