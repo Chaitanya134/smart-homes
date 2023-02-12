@@ -116,7 +116,7 @@ const FaceRecognition = () => {
     return (
         <div id="face-recognition">
             <h2 className="text-4xl font-bold mb-4">Sign in to
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400 mx-2">SMART HOMES</span> Console</h2>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400 mx-2">HOME SMARTLYTICS</span> Console</h2>
             <h3 className="text-lg mb-8">Click the sign in button and recognize your face to go to your dashboard</h3>
             <div className="flex items-center justify-center mb-8">
                 <div>
