@@ -11,9 +11,10 @@ ChartJS.register(
 
 function LineChart({ appliance }) {
   const [chartData, setChartData] = useState([]);
+  const [chartColor, setChartColor] = useState('#60a5fa6e');
 
   useEffect(() => {
-    socket.emit("dashboard", appliance);
+    socket.emit("dashboard", appliance, appliance.length % 2);
     
     socket.on("dashboard-data", (file, point) => {
       if (!file.includes(appliance.toLowerCase())) return;
@@ -21,16 +22,22 @@ function LineChart({ appliance }) {
     })
   }, [])
 
+  useEffect(() => {
+    const mean = chartData.reduce((a, b) => a + b, 0) / chartData.length;
+    if (chartData[chartData.length - 1] > 5) setChartColor('#ff000075');
+    else setChartColor('#60a5fa6e');
+  }, [chartData])
+
   return (
     <>
       <Line data={{
-        labels: ["12AM", "3AM", "6AM", "9AM", "12AM", "3AM", "6PM", "9PM", "12AM"],
+        labels: ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00"],
         datasets: [
           {
             label: appliance,
             data: chartData,
-            backgroundColor: '#60a5fa6e',
-            borderColor: '#60A5FA',
+            backgroundColor: chartColor,
+            borderColor: chartColor.slice(0, -2),
             tension: 0.4,
             fill: true,
             pointStyle: 'circle',

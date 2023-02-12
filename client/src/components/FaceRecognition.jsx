@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import * as faceapi from "@vladmandic/face-api"
 import { useNavigate } from "react-router-dom"
+import { useAppliances } from "../contexts/ApplianceProvider";
 
 const FaceRecognition = () => {
     const [username, setUsername] = useState("");
@@ -15,6 +16,15 @@ const FaceRecognition = () => {
             faceapi.nets.faceLandmark68Net.loadFromUri(`${import.meta.env.VITE_API_URL}/models`),
             faceapi.nets.ssdMobilenetv1.loadFromUri(`${import.meta.env.VITE_API_URL}/models`) //heavier/accurate version of tiny face detector
         ]).then(start)
+    }, [])
+
+    const { setIsLoading } = useAppliances();
+
+    useEffect(() => {
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 7000)
     }, [])
 
     function start() {
@@ -54,7 +64,7 @@ const FaceRecognition = () => {
                 const results = resizedDetections.map((d) => {
                     return faceMatcher.findBestMatch(d.descriptor)
                 })
-                
+
                 let userFound = false;
                 results.forEach((result, i) => {
                     const box = resizedDetections[i].detection.box
@@ -65,7 +75,11 @@ const FaceRecognition = () => {
                         videoRef.current.srcObject.getTracks().forEach(track => track.stop());
 
                         clearInterval(interval);
-                        navigate("/");
+                        setIsLoading(true);
+                        setTimeout(() => {
+                            setIsLoading(false);
+                            navigate("/");
+                        }, 5000)
                     }
                     if (result.label === document.getElementById("username").value && result.distance < 0.4) {
                         count++;
@@ -105,9 +119,17 @@ const FaceRecognition = () => {
 
     return (
         <div id="face-recognition">
-            <input id="username" className="outline rounded-sm mr-6" placeholder="" value={username} onChange={handleChange} />
-            <button onClick={handleClick}>Sign in</button>
-            <div id="video-container" className="relative">
+            <h2 className="text-4xl font-bold mb-4">Sign in to
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400 mx-2">SMART HOMES</span> Console</h2>
+            <h3 className="text-lg mb-8">Click the sign in button and recognize your face to go to your dashboard</h3>
+            <div className="flex items-center justify-center mb-8">
+                <div>
+                    <label className="font-bold text-lg">Username:</label>
+                    <input id="username" className="border-blue-400 outline-blue-400 border-2 rounded-sm mr-6 ml-2 py-2 px-4" placeholder="Username" value={username} onChange={handleChange} />
+                </div>
+                <button onClick={handleClick}>Sign in</button>
+            </div>
+            <div id="video-container" className="relative flex items-center justify-center">
                 <video ref={videoRef} width="720" height="550" muted></video>
             </div>
         </div>

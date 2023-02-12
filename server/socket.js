@@ -5,7 +5,7 @@ const { io } = require("./server");
 io.on("connection", socket => {
     console.log(socket.id);
 
-    socket.on("dashboard", async (fileName) => {
+    socket.on("dashboard", async (fileName, time) => {
         const chartData = {};
         socket.emit("start-loading");
         const files = fs.readdirSync("public/data");
@@ -23,6 +23,6 @@ io.on("connection", socket => {
                 socket.emit("dashboard-data", file, chartData[file][indices[file]]);
                 indices[file]++;
             })
-        }, 1000)
+        }, (time + 1) * 1000)
     });
 });

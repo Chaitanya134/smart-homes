@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import './App.css'
 import LoadingScreen from './components/LoadingScreen'
 import io from "socket.io-client"
@@ -6,6 +6,7 @@ import MiniDrawer from "./components/Drawer";
 import FaceRecognition from "./components/FaceRecognition";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Room from "./components/Room";
+import { useAppliances } from "./contexts/ApplianceProvider";
 
 export const socket = io(import.meta.env.VITE_API_URL);
 socket.on("connect", () => {
@@ -13,7 +14,7 @@ socket.on("connect", () => {
 })
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, setIsLoading } = useAppliances();
 
   useEffect(() => {
     socket.on("start-loading", () => setIsLoading(true))

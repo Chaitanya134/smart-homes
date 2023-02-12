@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react"
+import React, { useState, createContext, useContext } from "react"
 
 const AppliancesContext = createContext();
 
@@ -30,8 +30,10 @@ const AppliancesProvider = ({ children }) => {
 		}
 	]
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	return (
-		<AppliancesContext.Provider value={{ rooms }}>
+		<AppliancesContext.Provider value={{ rooms, isLoading, setIsLoading }}>
 			{children}
 		</AppliancesContext.Provider>
 	)

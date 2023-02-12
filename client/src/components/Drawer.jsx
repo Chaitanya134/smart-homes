@@ -127,7 +127,7 @@ export default function MiniDrawer() {
 								roomname ? (
 									<p>
 										<span className="text-gray-200">Dashboard</span> / {roomname}
-									</p>) : "Dash"
+									</p>) : "Dashboard"
 							}
 							{/* Dashboard {roomname && (`/ ${roomname}`)} */}
 						</Link>
