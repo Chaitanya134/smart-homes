@@ -15,5 +15,6 @@ app.use(cors({
 app.use('/data', express.static(path.join(__dirname, 'public/data')));
 app.use('/models', express.static(path.join(__dirname, 'public/models')));
 app.use('/labeled_images', express.static(path.join(__dirname, 'public/labelled_images')));
+app.use('/ml', express.static(path.join(__dirname, 'public/ml')));
 
 module.exports = app;
