@@ -5,7 +5,7 @@ const Room = ({ room }) => {
 	return (
 		<>
 			{
-				room?.appliances?.map(appliance => <ChartCard key={appliance} roomName={room.name} appliance={appliance} />)
+				room?.appliances?.map(appliance => <ChartCard key={appliance} appliance={appliance} />)
 			}
 		</>
 	)

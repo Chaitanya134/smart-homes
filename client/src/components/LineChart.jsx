@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, LineElement, Legend, CategoryScale, LinearScale, PointElement, Filler } from 'chart.js';
+// import io from "socket.io-client"
+import { socket } from '../App';
 
 ChartJS.register(
   Title, Tooltip, LineElement, Legend,
   CategoryScale, LinearScale, PointElement, Filler
 )
 
-function LineChart({ roomName, appliance, chartPoint }) {
-  const [chartData, setChartData] = useState([0, 1, 2, 3, 4, 5, 6]);
+function LineChart({ appliance }) {
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    setChartData(prev => [...prev, chartPoint].slice(-10));
-  }, [chartPoint]);
+    socket.emit("dashboard", appliance);
+    
+    socket.on("dashboard-data", (file, point) => {
+      if (!file.includes(appliance.toLowerCase())) return;
+      setChartData(prev => [...prev, point].slice(-10))
+    })
+  }, [])
 
   return (
     <>
