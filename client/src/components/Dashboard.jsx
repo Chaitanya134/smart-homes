@@ -13,7 +13,7 @@ const Dashboard = () => {
     for(const room of rooms)
       if (room.name === roomname)
         setCurrentRoom(room);
-  }, []);
+  }, [roomname]);
 
   return (
     <>

@@ -10,7 +10,7 @@ const AppliancesProvider = ({ children }) => {
 	const rooms = [
 		{
 			name: "Master Bedroom",
-			appliances: ["TV", "AC", "Lights"],
+			appliances: ["TV", "AC", "Fan", "Lights"],
 			src: "master bedroom.jpg"
 		},
 		{

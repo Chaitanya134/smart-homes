@@ -3,11 +3,11 @@ import ChartCard from './ChartCard';
 
 const Room = ({ room }) => {
 	return (
-		<div>
+		<>
 			{
-				room?.appliances?.map(appliance => <ChartCard roomName={room.name} appliance={appliance} />)
+				room?.appliances?.map(appliance => <ChartCard key={appliance} roomName={room.name} appliance={appliance} />)
 			}
-		</div>
+		</>
 	)
 }
 

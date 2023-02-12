@@ -21,6 +21,7 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import { Link } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
 import Dashboard from './Dashboard';
+import { useParams } from 'react-router-dom';
 
 
 const drawerWidth = 240;
@@ -90,9 +91,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 	}),
 );
 
-export default function MiniDrawer({chartPoint}) {
+export default function MiniDrawer() {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
+	const { roomname } = useParams();
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -105,7 +107,7 @@ export default function MiniDrawer({chartPoint}) {
 	return (
 		<Box sx={{ display: 'flex' }}>
 			<CssBaseline />
-			<AppBar position="fixed" open={open} style={{background: "linear-gradient(90deg, #60a5fa, #4ade80)"}}>
+			<AppBar position="fixed" open={open} style={{ background: "linear-gradient(90deg, #60a5fa, #4ade80)" }}>
 				<Toolbar>
 					<IconButton
 						color="inherit"
@@ -121,7 +123,13 @@ export default function MiniDrawer({chartPoint}) {
 					</IconButton>
 					<Typography variant="h6" noWrap component="div">
 						<Link href='\' color='inherit' underline='none'>
-							Dashboard
+							{
+								roomname ? (
+									<p>
+										<span className="text-gray-200">Dashboard</span> / {roomname}
+									</p>) : "Dash"
+							}
+							{/* Dashboard {roomname && (`/ ${roomname}`)} */}
 						</Link>
 					</Typography>
 				</Toolbar>
